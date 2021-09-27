@@ -24,6 +24,7 @@ async function playService({ channel, guild, song }: PlayServiceProps) {
   const audioStream = ytdl(song.data.url, { filter: 'audioonly' })
   const audioResource = createAudioResource(audioStream, { inlineVolume: true })
 
+  audioResource.volume?.setVolume(serverSongQueue.volume / 100)
   serverSongQueue.audioResource = audioResource
 
   const player = createAudioPlayer({
