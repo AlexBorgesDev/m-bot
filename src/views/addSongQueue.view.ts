@@ -20,7 +20,7 @@ async function addSongQueueView({
       `[${data.data.title}](${data.data.url}) by [${data.data.author.name}](${data.data.author.url}) [${data.data.duration.timestamp}]`
     )
 
-  channel.send({ embeds: [embed] })
+  await channel.send({ embeds: [embed] })
 }
 
 export default addSongQueueView
