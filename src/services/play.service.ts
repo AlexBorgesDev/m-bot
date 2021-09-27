@@ -36,10 +36,15 @@ async function playService({ channel, guild, song }: PlayServiceProps) {
     channel.send(error.message)
   })
 
-  player.on(AudioPlayerStatus.Idle, () => {
+  player.on(AudioPlayerStatus.Idle, async () => {
     const nextServerSongQueue = songQueue.get(guild.id)
     if (!nextServerSongQueue) return
-    else if (nextServerSongQueue.songs.length <= 1) return
+    else if (nextServerSongQueue.songs.length <= 1) {
+      nextServerSongQueue.voiceConnection?.disconnect()
+      songQueue.delete(guild.id)
+      await channel.send('**All songs have already been played**')
+      return
+    }
 
     nextServerSongQueue.songs.shift()
     playService({ channel, guild, song: nextServerSongQueue.songs[0] })
