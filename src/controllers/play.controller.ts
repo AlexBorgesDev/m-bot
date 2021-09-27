@@ -50,7 +50,7 @@ async function playController(args: string[], message: Message) {
         user: { name: member.user.username, imageURL: member.user.avatarURL() },
       },
     ],
-    volume: 50,
+    volume: 75,
     playing: false,
     textChannel: channel,
     voiceChannel: member.voice.channel,
