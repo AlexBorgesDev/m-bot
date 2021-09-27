@@ -9,7 +9,7 @@ export type SongObj = {
 }
 
 export type SongQueue = {
-  songs: SongObj
+  songs: SongObj[]
   volume: number
   player?: AudioPlayer | null
   playing: boolean
