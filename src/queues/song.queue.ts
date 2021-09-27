@@ -4,14 +4,17 @@ import { Message, StageChannel, VoiceChannel } from 'discord.js'
 import { YTSearchResult } from '../services/search.service'
 
 export type SongQueue = {
-  songs: { user: { name: string; imageURL?: string }; data: YTSearchResult }[]
+  songs: {
+    user: { name: string; imageURL?: string | null }
+    data: YTSearchResult
+  }[]
   volume: number
-  player?: AudioPlayer
+  player?: AudioPlayer | null
   playing: boolean
   textChannel: Message['channel']
   voiceChannel: VoiceChannel | StageChannel
-  audioResource?: AudioResource
-  voiceConnection?: VoiceConnection
+  audioResource?: AudioResource | null
+  voiceConnection?: VoiceConnection | null
 }
 
 const songQueue = new Map<string, SongQueue>()
