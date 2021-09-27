@@ -1,6 +1,9 @@
 import { Client, Intents } from 'discord.js'
 import { config } from 'dotenv'
 
+/* Events imports */
+import messageCreate from './events/messageCreate'
+
 // Read environment variables from .env file
 config()
 
@@ -21,5 +24,7 @@ const client = new Client({
 })
 
 client.once('ready', () => console.log(`Logged in as ${client.user?.tag}`))
+
+client.on('messageCreate', messageCreate)
 
 client.login(process.env.BOT_TOKEN)
