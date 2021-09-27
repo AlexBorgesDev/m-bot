@@ -1,11 +1,10 @@
 import { AudioPlayer, AudioResource, VoiceConnection } from '@discordjs/voice'
 import { Message, StageChannel, VoiceChannel } from 'discord.js'
-
-import { YTSearchResult } from '../services/search.service'
+import { VideoSearchResult } from 'yt-search'
 
 export type SongObj = {
   user: { name: string; imageURL?: string | null }
-  data: YTSearchResult
+  data: VideoSearchResult
 }
 
 export type SongQueue = {
