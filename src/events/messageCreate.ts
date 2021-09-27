@@ -4,6 +4,7 @@ import { prefix } from '../configs/configs.json'
 
 /* Controllers */
 import playController from '../controllers/play.controller'
+import skipController from '../controllers/skip.controller'
 import volumeController from '../controllers/volume.controller'
 
 async function messageCreate(message: Message): Promise<void> {
@@ -15,6 +16,7 @@ async function messageCreate(message: Message): Promise<void> {
   if (!command) return
 
   if (command === 'play') await playController(args, message)
+  else if (command === 'skip') await skipController(args, message)
   else if (command === 'volume') await volumeController(args, message)
   else await message.channel.send('**Command does not exist**')
 }
