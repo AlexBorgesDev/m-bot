@@ -21,6 +21,7 @@ const client = new Client({
     Intents.FLAGS.DIRECT_MESSAGE_REACTIONS,
     Intents.FLAGS.DIRECT_MESSAGE_TYPING,
   ],
+  restTimeOffset: 0,
 })
 
 client.once('ready', () => console.log(`Logged in as ${client.user?.tag}`))
