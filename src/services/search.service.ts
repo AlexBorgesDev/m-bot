@@ -10,4 +10,9 @@ async function findOne(value: string) {
   return results.videos[0]
 }
 
-export default { find, findOne }
+async function findPlaylist(listId: string) {
+  const { title, author, videos } = await yts.search({ listId })
+  return { title, author, videos }
+}
+
+export default { find, findOne, findPlaylist }
