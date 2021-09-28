@@ -22,18 +22,24 @@ async function playService({ channel, guild, song }: PlayServiceProps) {
   if (!serverSongQueue || !serverSongQueue.voiceConnection) return
 
   const audioStream = ytdl(song.data.url, { filter: 'audioonly' })
-  const audioResource = createAudioResource(audioStream, { inlineVolume: true })
+
+  const audioResource = createAudioResource(audioStream, {
+    inlineVolume: true,
+    silencePaddingFrames: 10,
+  })
 
   audioResource.volume?.setVolume(serverSongQueue.volume / 100)
+  serverSongQueue.audioStream = audioStream
   serverSongQueue.audioResource = audioResource
 
   const player = createAudioPlayer({
     behaviors: { noSubscriber: NoSubscriberBehavior.Pause },
   })
 
-  player.on('error', error => {
+  player.on('error', async error => {
+    console.log(error)
     serverSongQueue.playing = false
-    channel.send(error.message)
+    await channel.send(error.message)
   })
 
   player.on(AudioPlayerStatus.Idle, async () => {
