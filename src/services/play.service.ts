@@ -25,7 +25,7 @@ async function playService({ channel, guild, song }: PlayServiceProps) {
 
   const audioResource = createAudioResource(audioStream, {
     inlineVolume: true,
-    silencePaddingFrames: 10,
+    silencePaddingFrames: 25,
   })
 
   audioResource.volume?.setVolume(serverSongQueue.volume / 100)
@@ -33,7 +33,10 @@ async function playService({ channel, guild, song }: PlayServiceProps) {
   serverSongQueue.audioResource = audioResource
 
   const player = createAudioPlayer({
-    behaviors: { noSubscriber: NoSubscriberBehavior.Pause },
+    behaviors: {
+      noSubscriber: NoSubscriberBehavior.Pause,
+      maxMissedFrames: 2400,
+    },
   })
 
   player.on('error', async error => {
