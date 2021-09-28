@@ -6,13 +6,18 @@ async function find(value: string) {
 }
 
 async function findOne(value: string) {
-  const results = await yts.search(value)
+  const results = await yts(value)
   return results.videos[0]
 }
 
 async function findPlaylist(listId: string) {
-  const { title, author, videos } = await yts.search({ listId })
+  const { title, author, videos } = await yts({ listId })
   return { title, author, videos }
 }
 
-export default { find, findOne, findPlaylist }
+async function findById(videoId: string) {
+  const result = await yts({ videoId })
+  return result
+}
+
+export default { find, findOne, findPlaylist, findById }
