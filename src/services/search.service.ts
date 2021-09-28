@@ -11,8 +11,12 @@ async function findOne(value: string) {
 }
 
 async function findPlaylist(listId: string) {
-  const { title, author, videos } = await yts({ listId })
-  return { title, author, videos }
+  try {
+    const { title, author, videos } = await yts({ listId })
+    return { title, author, videos }
+  } catch (err) {
+    return undefined
+  }
 }
 
 async function findById(videoId: string) {
