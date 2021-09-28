@@ -39,10 +39,9 @@ async function playService({ channel, guild, song }: PlayServiceProps) {
     },
   })
 
-  player.on('error', async error => {
-    console.log(error)
+  player.on('error', async () => {
     serverSongQueue.playing = false
-    await channel.send(error.message)
+    await channel.send('**Something went wrong when playing the song**')
   })
 
   player.on(AudioPlayerStatus.Idle, async () => {
