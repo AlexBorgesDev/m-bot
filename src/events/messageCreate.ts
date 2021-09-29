@@ -3,6 +3,7 @@ import { Message } from 'discord.js'
 import { prefix } from '../configs/configs.json'
 
 /* Controllers */
+import helpController from '../controllers/help.controller'
 import playController from '../controllers/play.controller'
 import playlistController from '../controllers/playlist.controller'
 import skipController from '../controllers/skip.controller'
@@ -20,6 +21,7 @@ async function messageCreate(message: Message): Promise<void> {
   else if (command === 'skip') await skipController(args, message)
   else if (command === 'volume') await volumeController(args, message)
   else if (command === 'playlist') await playlistController(args, message)
+  else if (command === 'help') await helpController(message)
   else await message.channel.send('**Command does not exist**')
 }
 
