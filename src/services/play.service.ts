@@ -35,7 +35,7 @@ async function playService({ channel, guild, song }: PlayServiceProps) {
   const player = createAudioPlayer({
     behaviors: {
       noSubscriber: NoSubscriberBehavior.Pause,
-      maxMissedFrames: 28800,
+      maxMissedFrames: 57600,
     },
   })
 
